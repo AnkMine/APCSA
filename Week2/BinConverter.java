@@ -10,19 +10,21 @@ public class BinConverter {
         double remainder = 0;
         double result = 0;
 
-        System.out.print("Binary: ");
+        System.out.print("\nBinary: ");
 
-        int power = 0;
+        int power = 3;
 
         while (Math.pow(2, power + 1) <= number) 
         {
             power++;
         }
-
+// Commented code is not needed as power is already 3, and the while loop naturally evaluates "0" as "0000"
+/*
         if (number == 0) 
         {
             System.out.print("0");
         }
+*/
 
         while (power >= 0)
         {
@@ -35,7 +37,7 @@ public class BinConverter {
                 System.out.print("0");
             }
 
-            power = power - 1;
+            power --;
         }
         System.out.println();
 /*
