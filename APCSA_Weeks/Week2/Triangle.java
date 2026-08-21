@@ -16,7 +16,7 @@ public class Triangle {
         System.out.println("base = " + base + "\nheight = " + height);
 
         // calculate area of triangle
-        area = (double) (base * height)/2;
+        area = (base * height)/2.0;
         
         //Allows integers to be printed without the ".0" and doubles to be printed with decimal value
         /*
