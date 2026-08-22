@@ -40,6 +40,12 @@ public class BinConverter {
             power --;
         }
         System.out.println();
+
+        System.out.println("");
+
+        binary.close();
+    }
+}
 /*
 //BELOW IS THE CODE THAT WORKS WITH MULTIPLE IF STATEMENTS
 
@@ -118,7 +124,5 @@ public class BinConverter {
         //Can you optimize this so the remainder variable doesn't get used?
         //Can you implement a loop?
 */
-        System.out.println("");
-    }
-}
+        
 
