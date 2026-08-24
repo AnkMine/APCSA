@@ -147,7 +147,7 @@ public class MathGame {
     public static double getValidDouble(Scanner scanner, String variableName) {
         System.out.print("Enter value for " + variableName + ": ");
         while (!scanner.hasNextDouble()) {
-            System.out.println(makeBold("Error:") "Invalid input. Please enter a number. ");
+            System.out.println(makeBold("Error:") + "Invalid input. Please enter a number. ");
             scanner.next();
             System.out.print("Enter value for " + variableName + ": ");
         }
@@ -158,7 +158,7 @@ public class MathGame {
     public static int getValidInt(Scanner scanner, String promptMessage) {
         System.out.print(promptMessage);
         while (!scanner.hasNextInt()) {
-            System.out.println(makeBold("Error:") "Invalid input. Please enter a whole number from the menu.");
+            System.out.println(makeBold("Error:") + "Invalid input. Please enter a whole number from the menu.");
             scanner.next();
             System.out.print(promptMessage);
         }
