@@ -1,3 +1,4 @@
+// This class calculates different math formulas
 import java.util.Scanner;
 
 public class MathGame {
