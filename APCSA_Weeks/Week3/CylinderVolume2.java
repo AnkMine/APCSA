@@ -40,7 +40,7 @@ public class CylinderVolume2 {
             //stores value of input in a local variable
             double value = lengthInput.nextDouble();
 
-            // this if statement makes sure that the input is a number
+            // this if statement makes sure that the input is a positive number
             if (value < 0) {
                 System.out.println(makeBold("\n\t\tError:") + " Invalid input. Please enter a positive number.");
                 continue; // skips rest of the loop and starts next iteration to make sure each input is correct on all levels
