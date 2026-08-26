@@ -15,8 +15,10 @@ public class RecVolume {
 
         sc.close();
 
-        //print the values of dimensions, then calculate and print the volume
-        System.out.println("The volume of a rectangular prism with width " + width + " , length " + length + ", and height of " + height + " is " + (Math.round(width*length*height * 100.0)/100.0) + " cubed.");
+        double volume = (Math.round(width*length*height * 100.0)/100.0);
+
+        //print the values of dimensions, then print the volume
+        System.out.println("\nThe volume of a rectangular prism with width " + width + " , length " + length + ", and height of " + height + " is "+ volume + " cubed.\n");
 
 
 
