@@ -1,6 +1,7 @@
 // import java Scanner class
 import java.util.Scanner;
 
+// this class runs a trivia game in terminal
 public class TriviaGame {
 
     public static void main(String[] args) {
@@ -33,7 +34,7 @@ public class TriviaGame {
         // scrolls through each question, asks user for input, and checks the input with the answer
         for(int i = 0; i < questions.length; i++) {
             // prints the question
-            System.out.println("\n" + questions[i]);
+            System.out.println("\n\n" + questions[i]);
             System.out.println("\nYour answer is: ");
             
             // asks user for answer and makes sure input buffer only has answer in lowerCase
@@ -44,20 +45,20 @@ public class TriviaGame {
             if (userAnswer.equals(answers[i])) {
                 // if answer is correct print below:
 
-                System.out.println("\nYou got it right! Good job!");
+                System.out.println("\n\tYou got it right! Good job!");
                 score ++;
-                System.out.println(makeBold("\nScore: ") + score);
+                System.out.println(makeBold("\n\t\tScore: ") + score);
 
             } else {
                 // if answer is wrong print the below:
-                System.out.println("\nSorry, the answer was wrong. The correct answer was: " + makeBold(answers[i] + ""));
-                System.out.println(makeBold("\nScore: ") + score);
+                System.out.println("\n\tSorry, the answer was wrong. The correct answer was: " + makeBold(answers[i] + ""));
+                System.out.println(makeBold("\n\t\t\t\tScore: ") + score);
             }
         }
 
         //prints final score
-        System.out.println("\nYour final score was: " + makeBold(score + "\n"));
-        System.out.println("Good job!");
+        System.out.println("\n\t\t\tYour final score was: " + makeBold(score + "\n"));
+        System.out.println("Good job! Thank you for playing Trivia Game!");
 
         sc.close();
 
