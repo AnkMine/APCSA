@@ -11,7 +11,7 @@ public class GoodForm {
 
         // declare variables for radius, pi, and area
         double radius = keyboard.nextDouble();
-        double pi = 3.14;
+        double pi = Math.PI;
         double area = pi * radius * radius;
 
         // print the area of a circle in a string
