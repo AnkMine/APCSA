@@ -75,16 +75,9 @@ public class RandomQuiz {
                 int numericInput = getValidInt(sc, "\n" + question + "\nYour answer (number): ");
                 userResponse = String.valueOf(numericInput);
             } else {
-                // Use sc.next() for single-word questions
-                System.out.println("\n" + question);
-                System.out.print("Your answer (text): ");
-                userResponse = sc.next();
+                // Use getValidText for text-based questions
+                userResponse = getValidText(sc, "\n" + question + "\nYour answer (text): ");
             }
-
-            // prints the question and asks the user for an answer
-            System.out.println("\n" + question);
-            System.out.print("Your answer: ");
-            String userResponse = sc.next();
 
             // Compare user answer, making sure case does not matter in answer
             if (userResponse.equalsIgnoreCase(correctAnswer)) {
@@ -100,7 +93,7 @@ public class RandomQuiz {
     }
 
 
-    // Helper method to check if a String is a number
+    // Helper method to check if input is a number
     public static boolean isNumeric(String str) {
         // if there is an error java creates an exception and won't fail
         try {
@@ -119,6 +112,20 @@ public class RandomQuiz {
             System.out.print(promptMessage);
         }
         return scanner.nextInt();
+    }
+
+    // Helper method to ensures user inputs text (and NOT numbers) when text is expected
+    public static String getValidText(Scanner scanner, String promptMessage) {
+        System.out.print(promptMessage);
+        String input = scanner.next();
+        
+        while (isNumeric(input)) {
+            System.out.println("Error: Invalid input. Please enter text, not a number.");
+            System.out.print(promptMessage);
+            input = scanner.next();
+        }
+        
+        return input;
     }
 
 }
