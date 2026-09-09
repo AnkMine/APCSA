@@ -9,6 +9,6 @@ public class Cat {
     }
 
     public void favColor() {
-        System.out.println("My favorite color is grey.")
+        System.out.println("My favorite color is grey.");
     }
 }

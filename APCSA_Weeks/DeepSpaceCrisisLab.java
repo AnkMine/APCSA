@@ -121,10 +121,10 @@ public class DeepSpaceCrisisLab {
             {"A", "Flawless Execution — Mission Aced"}
         };
 
-        System.out.println("\n\t\t=================================");
+        System.out.println("\n\t\t======================================");
 
-        System.out.println("\t\tFinal Mission Score: " + makeBold(scoreCounter + "") + "/6");
-        System.out.println("\t\t\t\tGrade: " + makeBold(grade[scoreCounter][0] + "") + "(" + grade[scoreCounter][1] + ")");
+        System.out.println("\t\t\nFinal Mission Score: " + makeBold(scoreCounter + "") + "/6");
+        System.out.println("\t\t\t\tGrade: " + makeBold(grade[scoreCounter][0] + "") + "(" + grade[scoreCounter][1] + ")\n");
 
         sc.close();
 

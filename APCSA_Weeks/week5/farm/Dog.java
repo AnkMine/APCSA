@@ -1,6 +1,6 @@
 public class Dog {
 
-    public void speak() {
+    public void speak34() {
         System.out.println("woof");
     }
 
@@ -9,6 +9,6 @@ public class Dog {
     }
 
     public void favColor() {
-        System.out.println("My favorite color is brown.")
+        System.out.println("My favorite color is brown.");
     }
 }
