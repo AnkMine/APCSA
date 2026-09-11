@@ -7,6 +7,6 @@ public class Square {
     }
 
     public void printArea() {
-        System.out.println("The area is of the square is: " + (Math.pow(side, 2)));
+        System.out.println("\nThe area is of the square is: " + (Math.pow(side, 2)));
     }
 }

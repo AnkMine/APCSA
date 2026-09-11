@@ -13,6 +13,6 @@ public class Circle {
     }
 
     public void printArea() {
-        System.out.println("The area is of the circle is: " + (Math.pow(radius, 2) * pi));
+        System.out.println("\nThe area is of the circle is: " + (Math.pow(radius, 2) * pi) + "\n");
     }
 }
