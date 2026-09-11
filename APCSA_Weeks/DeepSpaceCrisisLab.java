@@ -6,8 +6,9 @@ public class DeepSpaceCrisisLab {
     public static void main(String [] args) {
 
         // question arrays
+        // object arrays allow storage or multiple data types
 
-        String[][] orbitalEasy = {
+        Object[][] orbitalEasy = {
             {"If a satellite completes 1 orbit every 90 minutes, how many full orbits will it complete in a 24-hour day?", "16", "Incorrect. In 24 hours (1,440 minutes), dividing by 90 gives 16 full orbits!"},
             {"A probe travels at a steady speed of 8 km/s. How far does it travel in 10 seconds?", "80", "Incorrect. Speed times time gives 8 km/s * 10 s = 80 km!"},
             {"If a space station's altitude is 400 km above Earth and the Earth's radius is 6,371 km, what is the station's orbital radius from Earth's center?", "6771", "Incorrect. Add the altitude to Earth's radius: 6,371 + 400 = 6,771 km!"},
@@ -16,13 +17,14 @@ public class DeepSpaceCrisisLab {
             {"If a Martian rover drives 12 meters per hour, how many hours will it take to travel 120 meters across a crater?", "10", "Incorrect. Distance divided by speed gives 120 / 12 = 10 hours!"}
         };
 
-        String[][] orbitalHard = {
+
+        Object[][] orbitalHard = {
             {"Using Kepler's Third Law (T^2 = a^3), if a distant planet is 4 AU away from its star, what is its orbital period in Earth years?", "8", "Incorrect. 4 cubed is 64, and the square root of 64 gives an orbital period of 8 years!"},
             {"A satellite in a circular orbit has a speed of 7 km/s. How many kilometers does it cover in a single 90-minute orbit?", "37800", "Incorrect. 90 minutes is 5,400 seconds. 7 km/s * 5,400 s = 37,800 km!"},
             {"If Earth's orbital speed is roughly 30 km/s and a comet travels at 42 km/s at the same distance, what is the percentage difference in their speeds relative to Earth's speed?", "40", "Incorrect. The difference is 12 km/s. (12 / 30) * 100 gives a 40% difference!"}
         };
 
-        String[][] alienEasy = {
+        Object[][] alienEasy = {
             {"Which real planet in our solar system is nicknamed the 'Red Planet' and frequently featured in alien stories?", "Mars", "Incorrect. Mars is known as the Red Planet!"},
             {"In Sci-Fi folklore, what shape are classic alien spacecraft usually reported to be?", "Flying Saucers", "Incorrect. The classic shape is a Flying Saucer (or disc)!"},
             {"What famous 1977 NASA mission sent a Golden Record into space containing sounds and images of Earth for potential aliens?", "Voyager", "Incorrect. The Voyager probes carry the Golden Record!"},
@@ -31,14 +33,14 @@ public class DeepSpaceCrisisLab {
             {"What hypothetical mega-structure, built around a star by advanced aliens, is designed to harvest all of its energy?", "Dyson Sphere", "Incorrect. That concept is known as a Dyson Sphere!"}
         };
 
-        String[][] alienHard = {
+        Object[][] alienHard = {
             {"What is the name of the famous 1961 mathematical equation used to estimate the number of active, communicative alien civilizations in the Milky Way?", "Drake Equation", "Incorrect. It is called the Drake Equation!"},
             {"In 1977, Ohio State University's Big Ear radio telescope picked up a strong 72-second narrow-band signal that remains an unexplained alien candidate. What was it named?", "Wow! Signal", "Incorrect. Astronomer Jerry Ehman wrote 'Wow!' on the printout, naming it the Wow! Signal!"},
             {"What is the name of the interstellar object discovered passing through our solar system in 2017, which some scientists speculated might be an alien lightsail?", "Oumuamua", "Incorrect. The object was named 'Oumuamua!"}
         };
 
-        String[][] easySet;
-        String[][] hardSet;
+        Object[][] easySet;
+        Object[][] hardSet;
 
         // create scanner object
         Scanner sc = new Scanner(System.in);
@@ -65,9 +67,8 @@ public class DeepSpaceCrisisLab {
         for (int i = 0; i < 3; i++) {
             System.out.println("\nQuestion " + (i+1) + ": " + easySet[i][0]);
             System.out.println("Your answer: ");
-            String input = sc.nextLine().trim();
 
-            if (input.equalsIgnoreCase(easySet[i][1])) {
+            if (checkAnswer(equalsIgnoreCase(easySet[i][1]))) {
                 System.out.println(makeBold("\t\t\tCorrect!"));
                 scoreCounter++;
             } else {
@@ -79,12 +80,13 @@ public class DeepSpaceCrisisLab {
 
         if (scoreCounter == 3) {
 
+            System.out.println("\nCongrats! You have moved on to more harder questions after completing the above with an acceptable accuracy.\n");
+
             for (int i = 0; i < 3; i++) {
                 System.out.println("\nHard Question " + (i+1) + ": " + hardSet[i][0]);
                 System.out.println("Your answer: ");
-                String input = sc.nextLine().trim();
 
-                if (input.equalsIgnoreCase(hardSet[i][1])) {
+                if (checkAnswer(equalsIgnoreCase(hardSet[i][1]))) {
                     System.out.println(makeBold("\t\t\tCorrect!"));
                     scoreCounter++;
                 } else {
@@ -98,9 +100,8 @@ public class DeepSpaceCrisisLab {
             for (int i = 3; i < 6; i++) {
                 System.out.println("\nQuestion " + (i+1) + ": " + easySet[i][0]);
                 System.out.println("Your answer: ");
-                String input = sc.nextLine().trim();
 
-                if (input.equalsIgnoreCase(easySet[i][1])) {
+                if (checkAnswer(equalsIgnoreCase(easySet[i][1]))) {
                     System.out.println(makeBold("\t\t\tCorrect!"));
                     scoreCounter++;
                 } else {
@@ -131,6 +132,25 @@ public class DeepSpaceCrisisLab {
 
     }
 
+    // allows use of nextInt() or nextLine() depending on the type of correctAnswer (int, or str)
+    public static boolean checkAnswer(Scanner sc, Object correctAnswer) {
+        if (correctAnswer instanceof Integer) { // if correct answer is an integer follow to line 141 if not, go to else if
+            try { // allows java to execute code that may give an error
+                int userInt = sc.nextInt();
+                sc.nextLine();
+                return userInt = (Integer) correctAnswer; // return true if the inputed answer by user is correct
+
+            } catch (Exception e) { // this "catches" a possible error and excecute the following lines
+                sc.nextLine();
+                return false;
+            }
+        } else if (correctAnswer instanceof String) { // if correct answer is a string, then excecutes following lines, if not goes to the return false; statement
+            
+            String userInput = sc.nextLine().trim();
+            return userInput.equalsIgnoreCase( (String) correctAnswer); // return true if the inputed answer by user is correct
+        }
+        return false; // if any additions are there to my code, this acts as a fail-safe
+    }
 
     //creating a helper method to assist with bolding text
     public static String makeBold(String text) {
