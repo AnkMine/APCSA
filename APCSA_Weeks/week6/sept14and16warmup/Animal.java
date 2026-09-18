@@ -5,13 +5,13 @@ public class Animal {
     private int age;
 
     // this method assigns the private variables
-    public void setVariables() {
-        animalType = "dog";
-        age = 5;
+    public void setVariables(String type, int ageVar) {
+        animalType = type;
+        age = ageVar;
     }
 
     // this method prints the private variables
     public void printInfo() {
-        System.out.println("The " + animalType + " is: " + age + " yrs old.");
+        System.out.println("\nThe " + animalType + " is: " + age + " yrs old.");
     }
 }

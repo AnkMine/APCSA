@@ -4,7 +4,7 @@ public class Runner {
 
     public static void main(String [] args) {
         
-
+        // contains all the formula choices to be printed out
         String[] formulaChoices = {
             "Area of a Triangle                  A = 1/2 * b * h",
             "Area of a Circle                    A = pi * r^2",
@@ -28,6 +28,7 @@ public class Runner {
         System.out.println("NO.   FORMULA NAME                        EQUATION");
         System.out.println("==========================================================================");
         
+        // for loop that prints the formulas in a table format with input #s printed prior to each row
         for (int i = 0; i < formulaChoices.length; i++) {
 
             if (i + 1 < 10) {
@@ -41,31 +42,52 @@ public class Runner {
 
         System.out.println("==========================================================================\n\n\n\n");
 
+        // creates new Scanner and Formulas instances
         Scanner sc = new Scanner(System.in);
         Formulas f = new Formulas();
 
+        // creates and assigns boolean for handling while loop functions
         boolean running = true;
 
-        String prompt = "Please enter an integer corresponding to the equation you would like to solve (1-16): ";
 
-        System.out.println(prompt);
+        String formulaPrompt = "Please enter an integer corresponding to the equation you would like to solve (1-16): ";
+
+        System.out.println(formulaPrompt);
+
+        int choice;
+
+        // game loop
         while (running) {
 
-            while(!sc.hasNextInt()) {
-                System.out.println("Invalid entry. Please enter an integer between 1 and 16.");
-                sc.next();
-                System.out.print(prompt);
+            // gets user input for formula prompt betwen 1-16
+            while (choice < 1 || choice > 16) {
+
+                System.out.print(formulaPrompt);
+                
+                if (sc.hasNextInt()) {
+                    choice = sc.nextInt();
+                    if (choice < 1 || choice > 16) {
+                        System.out.println("Invalid entry. Please enter an integer between 1 and 16.");
+                    }
+                } else {
+                    sc.next(); // clears input buffer to use again for .nextInt();
+                    System.out.println("Invalid entry. Please enter an integer between 1 and 16.");
+                }
             }
 
-            int choice = sc.nextInt();
+            
 
+            // instead of going through a long if, else if, and else chain; quitting the program would be faster if it is at the top (doesn't really matter for this small of a program)
             if (choice == 16) { 
                 System.out.println(makeBold("\n\t\t\t\t\tQuitting..."));
+                // quits program
                 running = false;
-            } else if (choice >= 1 && choice <= 15) {
+            } else {
 
-                System.out.println(formulaChoices[choice-1]);
+                // prints user formula choice
+                System.out.println("\t\t\t" + makeBold(formulaChoices[choice-1] + ""));
 
+                // below if, else if statements allow user to enter inputs corresponding to their formula chosen and calculate it
                 if (choice == 1) {
                     // Area of Triangle
 
@@ -161,12 +183,12 @@ public class Runner {
                     double r = getNonNegativeDouble(sc, "Enter resistance (Ohms): ");
                     f.OhmLaw(i, r);
                 }
-            } else {
-                System.out.println("Invalid entry. Please enter a number between 1 and 16.");
             }
 
             System.out.println();
         }
+
+        sc.close();
 
     }
 
@@ -174,7 +196,7 @@ public class Runner {
     public static double getDouble(Scanner sc, String prompt) {
         System.out.println(prompt);
         while(!sc.hasNextDouble()) {
-            System.out.println("Invalid entry. Please enter a number.");
+            System.out.println("\t\t\tInvalid entry. Please enter a number.");
             sc.next();
             System.out.print(prompt);
         }
@@ -185,7 +207,7 @@ public class Runner {
     public static double getNonNegativeDouble(Scanner sc, String prompt) {
         double val = getDouble(sc, prompt);
         while (val < 0) {
-            System.out.println("Value must be greater than 0.");
+            System.out.println("\t\t\tValue must be greater than 0.");
             val = getDouble(sc, prompt);
         }
 
@@ -195,7 +217,7 @@ public class Runner {
     public static double getNonEqualDouble(Scanner sc, String prompt, double badValue) {
         double val = getDouble(sc, prompt);
         while (val == badValue) {
-            System.out.println("Value cannot equal " + badValue + ",");
+            System.out.println("\t\t\tValue cannot equal " + badValue + ",");
             val = getDouble(sc, prompt);
         }
 
