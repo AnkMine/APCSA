@@ -3,7 +3,7 @@ public class Runner {
 
 	public static void main( String args[] ) {
         //(1) What parameter is passed to the constructor of JFrame? What does it do?
-        JFrame frame = new JFrame("Draw Circle");
+        JFrame frame = new JFrame("Draw Park");
 
         //Create JPanel object and add it to the frame
         Scenery canvas = new Scenery();

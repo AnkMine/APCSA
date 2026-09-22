@@ -8,7 +8,7 @@ public class Triangle {
     public Triangle()
     {
         base = 0;
-        heigth = 0;
+        height = 0;
     }
     
     //constructor that sets instance variables to parameters
