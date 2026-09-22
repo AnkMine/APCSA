@@ -6,22 +6,22 @@ public class Runner {
         
         // contains all the formula choices to be printed out
         String[] formulaChoices = {
-            "Area of a Triangle                  A = 1/2 * b * h",
-            "Area of a Circle                    A = pi * r^2",
-            "Volume of a Cylinder                V = pi * r^2 * h",
-            "Volume of a Sphere                  V = 4/3 * pi * r^3",
-            "Area of a Trapezoid                 A = 1/2 * (a + b) * h",
-            "Pythagorean Theorem                 c = sqrt(a^2 + b^2)",
-            "Distance Formula                    d = sqrt((x2 - x1)^2 + (y2 - y1)^2)",
-            "Quadratic Formula (real #s)         x = (-b +- sqrt(b^2 - 4ac)) / (2a)",
-            "Slope of a Line                     m = (y2 - y1) / (x2 - x1)",
-            "Law of Cosines                      c = sqrt(a^2 + b^2 - 2ab * cos(theta))",
-            "Gravitational Potential Energy      PE = m * g * h",
-            "Weight                              W = m * g",
-            "Kinetic Energy                      KE = 1/2 * m * v^2",
-            "Newton's Second Law                 F = m * a",
-            "Ohm's Law                           V = I * R",
-            "QUIT PROGRAM                        QUIT"
+            "Area of a Triangle                     A = 1/2 * b * h",
+            "Area of a Circle                       A = pi * r^2",
+            "Volume of a Cylinder                   V = pi * r^2 * h",
+            "Volume of a Sphere                     V = 4/3 * pi * r^3",
+            "Area of a Trapezoid                    A = 1/2 * (a + b) * h",
+            "Pythagorean Theorem                    c = sqrt(a^2 + b^2)",
+            "Distance Formula                       d = sqrt((x2 - x1)^2 + (y2 - y1)^2)",
+            "Quadratic Formula (real, complex #s)   x = (-b +- sqrt(b^2 - 4ac)) / (2a)",
+            "Slope of a Line                        m = (y2 - y1) / (x2 - x1)",
+            "Law of Cosines                         c = sqrt(a^2 + b^2 - 2ab * cos(theta))",
+            "Gravitational Potential Energy         PE = m * g * h",
+            "Weight                                 W = m * g",
+            "Kinetic Energy                         KE = 1/2 * m * v^2",
+            "Newton's Second Law                    F = m * a",
+            "Ohm's Law                              V = I * R",
+            "QUIT PROGRAM                           QUIT"
         };
 
         System.out.println("\n\n\n\n==========================================================================");
@@ -58,9 +58,12 @@ public class Runner {
 
         // game loop
         while (running) {
-
+            
+            choice = sc.nextInt();
             // gets user input for formula prompt betwen 1-16
             while (choice < 1 || choice > 16) {
+                
+                
 
                 System.out.print(formulaPrompt);
                 
@@ -207,7 +210,7 @@ public class Runner {
     public static double getNonNegativeDouble(Scanner sc, String prompt) {
         double val = getDouble(sc, prompt);
         while (val < 0) {
-            System.out.println("\t\t\tValue must be greater than 0.");
+            System.out.println("\t\t\tValue must be greater than or equal to 0.");
             val = getDouble(sc, prompt);
         }
 
