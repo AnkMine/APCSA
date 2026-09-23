@@ -27,12 +27,17 @@ public class Scenery extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);           // DO NOT REMOVE THIS. You MUST call the superclass paintComponent(Graphics) to clear the background.
+
+        // calls private sky(); method to draw a sky
         sky(g);
 
+        // uses a for loop to draw multiple trees using ptivate drawTree(); method
         for(int i = 100; i < 800; i += 100) {
             drawTree(g, i, 225);
         }
 
+
+        // below lines call ground(); lake(); and sun(); methods to draw a ground, lake, and sun respectively
         ground(g);
         lake(g);
         sun(g);
@@ -40,6 +45,7 @@ public class Scenery extends JPanel {
     }
 
 
+    // method to draw a sky and clouds
     private void sky(Graphics g) {
         Color colorBlue = new Color(0, 0, 255);
         g.setColor(colorBlue);
@@ -53,6 +59,7 @@ public class Scenery extends JPanel {
 
     }
 
+    // method to draw 1 tree
     private void drawTree(Graphics g, int x1, int y1) {
         Color colorGreen = new Color(0, 255, 0);
         Color colorBrown = new Color(150, 75, 0);
@@ -62,18 +69,21 @@ public class Scenery extends JPanel {
         g.fillRect(x1, (y1+25), 10, 50);
     }
 
+    // method to draw a ground
     private void ground(Graphics g) {
         Color colorBrown = new Color(150, 75, 0);
         g.setColor(colorBrown);
         g.fillRect(0, 500, 700, 600);
     }
     
+    // method to draw a lake
     private void lake(Graphics g) {
         Color colorBlue = new Color(0, 0, 255);
         g.setColor(colorBlue);
         g.fillOval(710, 500, 85, 100);
     }
 
+    // method to draw the sun
     private void sun(Graphics g) {
         Color colorYellow = new Color(255, 255, 0);
         g.setColor(colorYellow);

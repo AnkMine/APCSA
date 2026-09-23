@@ -59,13 +59,12 @@ public class Runner {
         // game loop
         while (running) {
             
-            choice = sc.nextInt();
-            // gets user input for formula prompt betwen 1-16
-            while (choice < 1 || choice > 16) {
-                
-                
+            choice = sc.nextInt(); // asks for user input and stores it into choice
 
-                System.out.print(formulaPrompt);
+            // ensures user input for formula prompt is betwen 1-16
+            while (choice < 1 || choice > 16) {
+
+                System.out.println(formulaPrompt);
                 
                 if (sc.hasNextInt()) {
                     choice = sc.nextInt();
@@ -88,13 +87,13 @@ public class Runner {
             } else {
 
                 // prints user formula choice
-                System.out.println("\t\t\t" + makeBold(formulaChoices[choice-1] + ""));
+                System.out.println("\n   \t\t" + makeBold(formulaChoices[choice-1] + ""));
 
                 // below if, else if statements allow user to enter inputs corresponding to their formula chosen and calculate it
                 if (choice == 1) {
                     // Area of Triangle
 
-                    double b = getNonNegativeDouble(sc, "Enter base: ");
+                    double b = getNonNegativeDouble(sc, "Enter base: "); // gets a double greater than or equal to 0 and stores it into a double variable; comment is same for all lines calling getNonNegativeDouble(); method
                     double h = getNonNegativeDouble(sc, "Enter height: ");
                     f.areaTriangle(b, h);
 
@@ -129,7 +128,7 @@ public class Runner {
                     
                 } else if (choice == 7) {
                     // Distance formula
-                    double x1 = getDouble(sc, "Enter x1: ");
+                    double x1 = getDouble(sc, "Enter x1: "); // gets a valid double  (can be positive, 0, or negative) and stores it into a double variable; comment is same for all lines in the if, else if, else chain calling getDouble()
                     double y1 = getDouble(sc, "Enter y1: ");
                     double x2 = getDouble(sc, "Enter x2: ");
                     double y2 = getDouble(sc, "Enter y2: ");
@@ -137,7 +136,7 @@ public class Runner {
                     
                 } else if (choice == 8) {
                     // Quadratic Formula
-                    double a = getNonEqualDouble(sc, "Enter 'a' (cannot be 0): ", 0);
+                    double a = getNonEqualDouble(sc, "Enter 'a' (cannot be equal to 0): ", 0); // gets valid double that is NOT equal to 0 and stores it into a double variable
                     double b = getDouble(sc, "Enter b: ");
                     double c = getDouble(sc, "Enter c: ");
                     f.quadraticForm(a, b, c);
@@ -146,7 +145,7 @@ public class Runner {
                     // Slope of a Line
                     double x1 = getDouble(sc, "Enter x1: ");
                     double y1 = getDouble(sc, "Enter y1: ");
-                    double x2 = getNonEqualDouble(sc, "Enter x2: ", x1);
+                    double x2 = getNonEqualDouble(sc, "Enter 'x1' (cannot be equal to x1): ", x1); // gets valid double that is NOT equal to x1 and stores it into a double variable
                     double y2 = getDouble(sc, "Enter y2: ");
                     f.slopeLine(x1, y1, x2, y2);
                     
@@ -195,18 +194,19 @@ public class Runner {
 
     }
 
-
+    // this method takes in a Scanner and a prompt and ensures the user enters a valid double
     public static double getDouble(Scanner sc, String prompt) {
-        System.out.println(prompt);
+        System.out.println("\n" + prompt);
         while(!sc.hasNextDouble()) {
-            System.out.println("\t\t\tInvalid entry. Please enter a number.");
+            System.out.println("\t\t\t Invalid entry. Please enter a number.");
             sc.next();
-            System.out.print(prompt);
+            System.out.println("\n" + prompt);
         }
 
         return sc.nextDouble();
     }
 
+    // this method takes in a Scanner and a prompt and ensures the user enters a double greater than or equal to 0
     public static double getNonNegativeDouble(Scanner sc, String prompt) {
         double val = getDouble(sc, prompt);
         while (val < 0) {
@@ -217,6 +217,7 @@ public class Runner {
         return val;
     }
 
+    // this method takes in a Scanner, a prompt, and a double "badValue" and ensures the users enters a double not equal to "badValue"
     public static double getNonEqualDouble(Scanner sc, String prompt, double badValue) {
         double val = getDouble(sc, prompt);
         while (val == badValue) {
