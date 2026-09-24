@@ -6,7 +6,6 @@ public class Formulas {
 
     private static final String RESET = "\033[0m";
     private static final String RED = "\033[31m";
-    private static final String GREEN = "\033[32m";
 
 
     public void areaTriangle(double b, double h) {
@@ -136,7 +135,7 @@ public class Formulas {
         System.out.println("\n\tThe voltage across a circuit with current " + i + " Amps and resistance " + r + " Ohms is " + makeBold(v + "", RED) + " Volts.");
     }
 
-    //creating a helper method to assist with bolding text
+    //creating a helper method to assist with bolding and changing color of text
     public static String makeBold(String text, String color) {
         return "\033[1m" + color + text + RESET;
     }

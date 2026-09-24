@@ -3,12 +3,13 @@ import java.util.Scanner;
 public class Runner {
 
     // setting user prompt to a variable of type "String"
-    private static final String formulaPrompt = "Please enter an integer corresponding to the equation you would like to solve (1-16): ";
+    private static final String formulaPrompt = "Please enter an integer corresponding to the equation you would like to solve (0-15): ";
 
     public static void main(String [] args) {
         
         // contains all the formula choices to be printed out
         String[] formulaChoices = {
+            "QUIT PROGRAM                           QUIT",
             "Area of a Triangle                     A = 1/2 * b * h",
             "Area of a Circle                       A = pi * r^2",
             "Volume of a Cylinder                   V = pi * r^2 * h",
@@ -24,7 +25,6 @@ public class Runner {
             "Kinetic Energy                         KE = 1/2 * m * v^2",
             "Newton's Second Law                    F = m * a",
             "Ohm's Law                              V = I * R",
-            "QUIT PROGRAM                           QUIT"
         };
 
         
@@ -60,12 +60,12 @@ public class Runner {
                     sc.nextLine();
                     
                     if (choice < 0 || choice > 15) {
-                        System.out.println("\t\t\t Invalid entry. Please enter an integer between 1 and 16.\n");
+                        System.out.println("\t\t\t Invalid entry. Please enter an integer between 0 and 15.\n");
                         System.out.println(formulaPrompt);
                     }
                 } else {
                     sc.next();
-                    System.out.println("\t\t\t Invalid entry. Please enter an integer between 1 and 16.\n");
+                    System.out.println("\t\t\t Invalid entry. Please enter an integer between 0 and 15.\n");
                     System.out.println(formulaPrompt);
                 }
             }
@@ -80,7 +80,7 @@ public class Runner {
             } else {
 
                 // prints user formula choice
-                System.out.println("\n   \t\t" + makeBold(formulaChoices[choice-1] + ""));
+                System.out.println("\n   \t\t" + makeBold(formulaChoices[choice] + ""));
 
                 // below if, else if statements allow user to enter inputs corresponding to their formula chosen and calculate it
                 if (choice == 1) {
@@ -254,10 +254,10 @@ public class Runner {
         System.out.println("==========================================================================");
 
         for (int i = 0; i < formulaChoices.length; i++) {
-            if (i + 1 < 10) {
-                System.out.print("[ " + (i + 1) + "]  ");
+            if (i < 10) {
+                System.out.print("[ " + i + "]  ");
             } else {
-                System.out.print("[" + (i + 1) + "]  ");
+                System.out.print("[" + i + "]  ");
             }
             System.out.println(formulaChoices[i]);
         }
