@@ -2,6 +2,9 @@ import java.util.Scanner;
 
 public class Runner {
 
+    // setting user prompt to a variable of type "String"
+    private static final String formulaPrompt = "Please enter an integer corresponding to the equation you would like to solve (1-16): ";
+
     public static void main(String [] args) {
         
         // contains all the formula choices to be printed out
@@ -24,23 +27,13 @@ public class Runner {
             "QUIT PROGRAM                           QUIT"
         };
 
-        System.out.println("\n\n\n\n==========================================================================");
-        System.out.println("NO.   FORMULA NAME                        EQUATION");
-        System.out.println("==========================================================================");
         
-        // for loop that prints the formulas in a table format with input #s printed prior to each row
-        for (int i = 0; i < formulaChoices.length; i++) {
+        
+        
 
-            if (i + 1 < 10) {
-                System.out.print("[ " + (i + 1) + "]  ");
-            } else {
-                System.out.print("[" + (i + 1) + "]  ");
-            }
-            
-            System.out.println(formulaChoices[i]);
-        }
+        // calls printFormulaChoices(); method that prints the array in a table format and the prompt for user
+        printFormulaChoices(formulaChoices);
 
-        System.out.println("==========================================================================\n\n\n\n");
 
         // creates new Scanner and Formulas instances
         Scanner sc = new Scanner(System.in);
@@ -49,31 +42,31 @@ public class Runner {
         // creates and assigns boolean for handling while loop functions
         boolean running = true;
 
+        
+        
 
-        String formulaPrompt = "Please enter an integer corresponding to the equation you would like to solve (1-16): ";
-
-        System.out.println(formulaPrompt);
-
-        int choice;
+        int choice = -1;
 
         // game loop
         while (running) {
             
-            choice = sc.nextInt(); // asks for user input and stores it into choice
+            printFormulaChoices(formulaChoices);
 
-            // ensures user input for formula prompt is betwen 1-16
+            // ensures user input is an int and the int is in between 1-16
             while (choice < 1 || choice > 16) {
 
-                System.out.println(formulaPrompt);
-                
                 if (sc.hasNextInt()) {
                     choice = sc.nextInt();
+                    sc.nextLine();
+                    
                     if (choice < 1 || choice > 16) {
-                        System.out.println("Invalid entry. Please enter an integer between 1 and 16.");
+                        System.out.println("\t\t\t Invalid entry. Please enter an integer between 1 and 16.\n");
+                        System.out.println(formulaPrompt);
                     }
                 } else {
-                    sc.next(); // clears input buffer to use again for .nextInt();
-                    System.out.println("Invalid entry. Please enter an integer between 1 and 16.");
+                    sc.next();
+                    System.out.println("\t\t\t Invalid entry. Please enter an integer between 1 and 16.\n");
+                    System.out.println(formulaPrompt);
                 }
             }
 
@@ -185,9 +178,31 @@ public class Runner {
                     double r = getNonNegativeDouble(sc, "Enter resistance (Ohms): ");
                     f.OhmLaw(i, r);
                 }
+
+
+                System.out.println("\nThank you for calculating!\n");
+
+                // logic that asks if user would like to calculate again and checks if user enters a value y or n
+                System.out.print("Would you like to solve another equation? (y/n): ");
+
+                String answer = sc.nextLine().trim().toLowerCase();
+
+                while(!answer.equals("n") && !answer.equals("y")) {
+                    System.out.println("\n\t\t\t Invalid entry. Please enter y or n:");
+                    System.out.println("\nWould you like to solve another equation? (y/n): ");
+                    answer = sc.nextLine().trim().toLowerCase();
+                }
+
+                if (answer.startsWith("n")) {
+                    System.out.println(makeBold("\n\t\t\t\t\tQuitting..."));
+                    running = false;
+                } else {
+                    choice = -1;
+                }
+
             }
 
-            System.out.println();
+            
         }
 
         sc.close();
@@ -198,12 +213,14 @@ public class Runner {
     public static double getDouble(Scanner sc, String prompt) {
         System.out.println("\n" + prompt);
         while(!sc.hasNextDouble()) {
-            System.out.println("\t\t\t Invalid entry. Please enter a number.");
             sc.next();
+            System.out.println("\n\t\t\t Invalid entry. Please enter a number.");            
             System.out.println("\n" + prompt);
         }
 
-        return sc.nextDouble();
+        double val = sc.nextDouble();
+        sc.nextLine();
+        return val;
     }
 
     // this method takes in a Scanner and a prompt and ensures the user enters a double greater than or equal to 0
@@ -221,12 +238,37 @@ public class Runner {
     public static double getNonEqualDouble(Scanner sc, String prompt, double badValue) {
         double val = getDouble(sc, prompt);
         while (val == badValue) {
-            System.out.println("\t\t\tValue cannot equal " + badValue + ",");
+            System.out.println("\t\t\tValue cannot equal " + badValue + ".");
             val = getDouble(sc, prompt);
         }
 
         return val;
     }
+
+    // takes in a 1D array and prints the information in the array in a table format
+    // also prints prompt for user
+    public static void printFormulaChoices(String[] formulaChoices) {
+
+        System.out.println("\n\n\n\n==========================================================================");
+        System.out.println("NO.   FORMULA NAME                        EQUATION");
+        System.out.println("==========================================================================");
+
+        for (int i = 0; i < formulaChoices.length; i++) {
+            if (i + 1 < 10) {
+                System.out.print("[ " + (i + 1) + "]  ");
+            } else {
+                System.out.print("[" + (i + 1) + "]  ");
+            }
+            System.out.println(formulaChoices[i]);
+        }
+
+        System.out.println("==========================================================================\n\n\n\n");
+
+        System.out.println(formulaPrompt);
+
+        
+    }
+
 
 
     //creating a helper method to assist with bolding text
