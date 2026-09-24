@@ -130,7 +130,7 @@ public class Formulas {
     }
 
 
-    public void OhmLaw(double i, double r) {
+    public void ohmLaw(double i, double r) {
         // calculates Ohm's Law using parameters given and formula
         double v = i * r;
         System.out.println("\n\tThe voltage across a circuit with current " + i + " Amps and resistance " + r + " Ohms is " + makeBold(v + "", RED) + " Volts.");

@@ -31,8 +31,7 @@ public class Runner {
         
         
 
-        // calls printFormulaChoices(); method that prints the array in a table format and the prompt for user
-        printFormulaChoices(formulaChoices);
+        
 
 
         // creates new Scanner and Formulas instances
@@ -50,16 +49,17 @@ public class Runner {
         // game loop
         while (running) {
             
+            // calls printFormulaChoices(); method that prints the array in a table format and the prompt for user
             printFormulaChoices(formulaChoices);
 
             // ensures user input is an int and the int is in between 1-16
-            while (choice < 1 || choice > 16) {
+            while (choice < 0 || choice > 15) {
 
                 if (sc.hasNextInt()) {
                     choice = sc.nextInt();
                     sc.nextLine();
                     
-                    if (choice < 1 || choice > 16) {
+                    if (choice < 0 || choice > 15) {
                         System.out.println("\t\t\t Invalid entry. Please enter an integer between 1 and 16.\n");
                         System.out.println(formulaPrompt);
                     }
@@ -72,8 +72,8 @@ public class Runner {
 
             
 
-            // instead of going through a long if, else if, and else chain; quitting the program would be faster if it is at the top (doesn't really matter for this small of a program)
-            if (choice == 16) { 
+            // handles calculations based on user's input stored in choice var
+            if (choice == 0) { 
                 System.out.println(makeBold("\n\t\t\t\t\tQuitting..."));
                 // quits program
                 running = false;
@@ -138,7 +138,7 @@ public class Runner {
                     // Slope of a Line
                     double x1 = getDouble(sc, "Enter x1: ");
                     double y1 = getDouble(sc, "Enter y1: ");
-                    double x2 = getNonEqualDouble(sc, "Enter 'x1' (cannot be equal to x1): ", x1); // gets valid double that is NOT equal to x1 and stores it into a double variable
+                    double x2 = getNonEqualDouble(sc, "Enter 'x2' (cannot be equal to x1): ", x1); // gets valid double that is NOT equal to x1 and stores it into a double variable
                     double y2 = getDouble(sc, "Enter y2: ");
                     f.slopeLine(x1, y1, x2, y2);
                     
@@ -176,8 +176,8 @@ public class Runner {
                     // Ohm's Law
                     double i = getNonNegativeDouble(sc, "Enter current (A): ");
                     double r = getNonNegativeDouble(sc, "Enter resistance (Ohms): ");
-                    f.OhmLaw(i, r);
-                }
+                    f.ohmLaw(i, r);
+                } // no need for else statement here as verification for valid input done at top of game while loop
 
 
                 System.out.println("\nThank you for calculating!\n");
