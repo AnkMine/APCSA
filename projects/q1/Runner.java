@@ -26,6 +26,7 @@ public class Runner {
         while (!season.equalsIgnoreCase("winter") && !season.equalsIgnoreCase("spring") && !season.equalsIgnoreCase("fall")) {
             // no need to clear input buffer
             System.out.print("\n\t\t\t Invalid input. Please enter 'winter', 'spring', or 'fall' : ");
+            System.out.print("\nPlease enter 'day' or 'night' : ");
             season = sc.next();
         }
         
