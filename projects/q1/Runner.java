@@ -6,7 +6,7 @@ public class Runner {
 	public static void main( String args[] ) {
         
         // Create the frame object. Give it a title appropriate to the application
-        JFrame frame = new JFrame("Scenery Project");
+        JFrame frame = new JFrame("Suburb Scene");
 
         // Ask the user for a time of day and season
         Scanner sc = new Scanner(System.in);
@@ -26,7 +26,6 @@ public class Runner {
         while (!season.equalsIgnoreCase("winter") && !season.equalsIgnoreCase("spring") && !season.equalsIgnoreCase("fall")) {
             // no need to clear input buffer
             System.out.print("\n\t\t\t Invalid input. Please enter 'winter', 'spring', or 'fall' : ");
-            System.out.print("\nPlease enter 'day' or 'night' : ");
             season = sc.next();
         }
         
