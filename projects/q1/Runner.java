@@ -6,7 +6,7 @@ public class Runner {
 	public static void main( String args[] ) {
         
         // Create the frame object. Give it a title appropriate to the application
-        JFrame frame = new JFrame("Suburb Scene");
+        JFrame frame = new JFrame("Suburb Scene w/ One House");
 
         // Ask the user for a time of day and season
         Scanner sc = new Scanner(System.in);

@@ -10,7 +10,7 @@ public class Scenery extends JPanel {
 	// instance variables
 	private String timeOfDay, season;
 	// types of colors
-	private Color skyBlue, grassGreen, skyDarkBlue, darkGreyBrown, deepGoldenBrown, freshWarmBrown, greyWhite, white, yellow, darkWood, black, pink, red, flowerGreen, treeLeafOrange, grassFall;
+	private Color skyBlue, grassGreen, skyDarkBlue, darkGreyBrown, deepGoldenBrown, freshWarmBrown, greyWhite, darkWood, pink, ladybugRed, flowerGreen, treeLeafOrange, grassFall, caterpillarGreen;
 
 
 	// color instance variable for different shapes
@@ -29,18 +29,17 @@ public class Scenery extends JPanel {
 		grassFall = new Color(125, 105, 57);
 		skyDarkBlue = new Color(0, 0, 139);
 
-		yellow = new Color(240, 243, 53);
+
 		greyWhite = new Color(211, 211, 211);
-		white = new Color(255, 255, 255);
-		black = new Color(0, 0, 0);
 
 		darkWood = new Color(133, 94, 66);
 		
 		pink = new Color(255, 105, 180);
 		flowerGreen = new Color(16, 127, 52);
 
-		red = new Color(231, 24, 9);
+		ladybugRed = new Color(231, 24, 9);
 		
+		caterpillarGreen = new Color(20, 107, 71);
 
 		darkGreyBrown = new Color(80, 70, 65);
 		deepGoldenBrown = new Color(95, 60, 35);
@@ -98,14 +97,24 @@ public class Scenery extends JPanel {
 		if (timeOfDay.equalsIgnoreCase("day")) {
 			g.setColor(skyBlue);
 			g.fillRect(0, 0, 800, 350);
-			g.setColor(yellow);
+			g.setColor(Color.YELLOW);
 			g.fillOval(30, 20, 75, 75);
 		} else {
 			g.setColor(skyDarkBlue);
         	g.fillRect(0, 0, 800, 350);
 
-			g.setColor(white);
+			g.setColor(Color.WHITE);
 			g.fillArc(30, 20, 85, 85, 115, 200);
+
+			g.setColor(Color.YELLOW);
+			int starW = 6;
+			int starH = 6;
+			int numberOfStars = 15;
+			for (int i = 0; i < numberOfStars; i++) {
+				int starX = (int) (Math.random() * (800 + 1));
+				int starY = (int) (Math.random() * (350 + 1));
+				g.fillOval(starX, starY, starW, starH);
+			}
 		}
 
 
@@ -125,17 +134,17 @@ public class Scenery extends JPanel {
 		int currentTreeX = startX;
 		int currentTreeY = 350;    
 
-		for (int i = 0; i < numberOfTrees; i++) {      
+		for (int i = 0; i < numberOfTrees; i++) {
 
-			drawTree(g, currentTreeX, currentTreeY, currentTreeX - 10, currentTreeY - 30);     
+			drawTree(g, currentTreeX, currentTreeY, currentTreeX - 10, currentTreeY - 30);
 			
 
-			currentTreeX += spacingX;     
+			currentTreeX += spacingX;
 			
-			// After drawing the 5th tree (index 4), move to the second row
+			// After drawing the 5th tree, move to the second row
 			if (i == 4) {     
-				currentTreeX = startX;          // Reset X
-				currentTreeY += spacingY;       // Shift Y down to create the second row
+				currentTreeX = startX;
+				currentTreeY += spacingY;
 			}
 		}
 
@@ -147,24 +156,28 @@ public class Scenery extends JPanel {
 
 		drawFlowers(g, 300, 500);
 
+		drawLadybug(g, 450, 410);
+
+		drawCaterpillar(g);
+
 	}
 
 	private void drawTree(Graphics g, int trunkX, int trunkY, int branchX2, int branchY2) {
 
 		
 		
-		int trunkWidth = 20;
-		int trunkHeight = 50;
+		int trunkW = 20;
+		int trunkH = 50;
 		// tree trunk
 		g.setColor(tree);
-		g.fillRect(trunkX, trunkY, trunkWidth, trunkHeight);
+		g.fillRect(trunkX, trunkY, trunkW, trunkH);
 
 		if (season.equalsIgnoreCase("winter")) {
 			// left main branch
 			g.drawLine(trunkX, trunkY + 10, branchX2, branchY2);
 
 			// right main branch
-			g.drawLine(trunkX + trunkWidth, trunkY + 10, branchX2 + 45, branchY2 + 5);
+			g.drawLine(trunkX + trunkW, trunkY + 10, branchX2 + 45, branchY2 + 5);
 
 			// secondary branches
 			g.drawLine(trunkX + 10, trunkY, branchX2 + 20, branchY2 - 15);
@@ -189,15 +202,15 @@ public class Scenery extends JPanel {
 		g.fillRect(100, 400, 200, 150); // Width 200, Height 150
 		
 		// house outline
-		g.setColor(black);
+		g.setColor(Color.BLACK);
 		g.drawRect(100, 400, 200, 150);
 
 		// Modern Overhanging Roof
-		g.setColor(black);
+		g.setColor(Color.BLACK);
 		g.fillRect(80, 380, 240, 20);
 		
 		// Roof Outline
-		g.setColor(black);
+		g.setColor(Color.BLACK);
 		g.drawRect(80, 380, 240, 20);
 
 		// front door
@@ -205,19 +218,19 @@ public class Scenery extends JPanel {
 		g.fillRect(180, 470, 40, 80);
 		
 		// door outline
-		g.setColor(black);
+		g.setColor(Color.BLACK);
 		g.drawRect(180, 470, 40, 80);
 		
-		// yellow doorknob
-		g.setColor(yellow);
+		// Color.YELLOW doorknob
+		g.setColor(Color.YELLOW);
 		g.fillOval(212, 510, 6, 6);
 
 
 		// window
 		g.setColor(greyWhite);
 		g.fillRect(180, 415, 40, 40);
-
-		g.setColor(black);
+		// window lines
+		g.setColor(Color.BLACK);
 		g.drawLine(200, 415, 200, 455);
 		g.drawLine(180, 435, 220, 435);
 	
@@ -234,31 +247,115 @@ public class Scenery extends JPanel {
 		g.fillOval(x + 3, y + 30, 15, 10);  // Right leaf
 
 		// petals
-		g.setColor(yellow);
-		g.fillOval(x - 15, y - 25, 20, 20); // Top-left petal
-		g.fillOval(x - 5,  y - 25, 20, 20); // Top-right petal
-		g.fillOval(x - 20, y - 15, 20, 20); // Left petal
-		g.fillOval(x + 0,  y - 15, 20, 20); // Right petal
-		g.fillOval(x - 10, y - 5, 20, 20);  // Bottom petal
+		int petalW = 20;
+		int petalH = 20;
+		g.setColor(Color.YELLOW);
+		g.fillOval(x - 15, y - 25, petalW, petalH); // Top-left petal
+		g.fillOval(x - 5,  y - 25, petalW, petalH); // Top-right petal
+		g.fillOval(x - 20, y - 15, petalW, petalH); // Left petal
+		g.fillOval(x + 0,  y - 15, petalW, petalH); // Right petal
+		g.fillOval(x - 10, y - 5, petalW, petalH);  // Bottom petal
 
 		// central circle
 		g.setColor(pink);
 		g.fillOval(x - 7, y - 17, 14, 14);
 	}
 
-	private void drawLadybug(Graphics g) {
+	private void drawLadybug(Graphics g, int x, int y) {
 		
+		// Tested hardcoded x&y coordinates to find the relative spacing between components then replaced them with variables for easier repositioning
 
-		
-		
-		
-		// draw red body
-		// draw black head
-		// draw center division line
-		// draw spots
+		// body
+		g.setColor(ladybugRed);
+		g.fillOval(x, y, 50, 60);
+
+		// center line
+		g.setColor(Color.BLACK);
+		g.drawLine(x + 25, y, x + 25, y + 60);
+
+		// spots on body
+		int radius = 6;
+		g.fillOval(x + 8, y + 15, radius, radius);
+		g.fillOval(x + 15, y + 35, radius, radius);
+		g.fillOval(x + 36, y + 15, radius, radius);
+		g.fillOval(x + 29, y + 35, radius, radius);
+
+		// legs
+			// left
+		g.drawLine(x - 20, y + 5, x + 10, y + 15);
+		g.drawLine(x - 25, y + 25, x + 10, y + 25);
+		g.drawLine(x - 20, y + 45, x + 10, y + 35);
+			// right
+		g.drawLine(x + 40, y + 15, x + 70, y + 5);
+		g.drawLine(x + 40, y + 25, x + 75, y + 25);
+		g.drawLine(x + 40, y + 35, x + 70, y + 45);
+
+		// head
+		g.fillOval(x + 13, y - 12, 24, 24);
+
+
 	}
 
 	private void drawCaterpillar(Graphics g) {
+
+		// body segments
+		int segmentCount = 6;
+		int spacing = 35;
+		int size = 45;
+		for(int i = 0; i < segmentCount; i++) {
+			int x = 530 + (i * spacing);
+
+			int y = 405;
+			if (i % 2 == 0) {
+				y += 10;
+			}
+			g.setColor(caterpillarGreen);
+			g.fillOval(x, y, size, size);
+
+			g.setColor(Color.BLACK);
+			g.drawOval(x, y, size, size);
+		}
+
+		// head vars
+		int headX = 530 + (segmentCount * spacing) - 10;
+		int headY = 400;
+		int headSize = 50;
+
+		// head + outline
+		g.setColor(caterpillarGreen);
+		g.fillOval(headX, headY, headSize, headSize);
+		g.setColor(Color.BLACK);
+		g.drawOval(headX, headY, headSize, headSize);
+
+		// eyes
+		int eyeSize = 10;
+		int pupilSize = 4;
+		g.setColor(Color.WHITE);
+			// left
+		g.fillOval(headX + 15, headY + 15, eyeSize, eyeSize);
+			// right
+		g.fillOval(headX + 30, headY + 15, eyeSize, eyeSize);
+
+		g.setColor(Color.BLACK);
+			// left
+		g.fillOval(headX + 18, headY + 18, pupilSize, pupilSize);
+			// right
+		g.fillOval(headX + 33, headY + 18, pupilSize, pupilSize);
+
+		// Smile
+		g.drawArc(headX + 17, headY + 25, 20, 15, 180, 180);
+
+		// Antennae
+		int ovalRadius = 6;
+			// left
+		g.drawLine(headX + 20, headY, headX + 10, headY - 15);
+		g.fillOval(headX + 7, headY - 20, ovalRadius, ovalRadius);
+			// right
+		g.drawLine(headX + 35, headY, headX + 45, headY - 15);
+		g.fillOval(headX + 42, headY - 20, ovalRadius, ovalRadius);
+
+
+
 		// draw overlapping ovals using for loops
 		// draw head
 		// draw eyes
