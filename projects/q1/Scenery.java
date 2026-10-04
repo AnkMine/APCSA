@@ -7,14 +7,36 @@ import java.awt.Dimension;
 
 public class Scenery extends JPanel {
 	
-	// instance variables
-	private String timeOfDay, season;
-	// types of colors
-	private Color skyBlue, grassGreen, skyDarkBlue, darkGreyBrown, deepGoldenBrown, freshWarmBrown, greyWhite, darkWood, pink, ladybugRed, flowerGreen, treeLeafOrange, grassFall, caterpillarGreen;
+		// Panel Dimensions
+		private static final int PANEL = 800;
+		private static final int PANELH = 600;
+		private static final int HORIZONY = 350;
+		
+		// Scene Configurations
+		private String timeOfDay;
+		private String season;
 
+		// Active Scene Colors
+		private Color treeTrunkColor;
+		private Color grassColor;
 
-	// color instance variable for different shapes
-	private Color tree, grass;
+		// Color Palette
+		private Color skyBlue;
+		private Color skyDarkBlue;
+		private Color grassGreen;
+		private Color grassFall;
+		private Color snowWhite;
+		
+		private Color winterTrunkBrown;
+		private Color fallTrunkBrown;
+		private Color springTrunkBrown;
+		
+		private Color leafOrange;
+		private Color foliageGreen;
+		private Color houseWood;
+		private Color flowerPink;
+		private Color ladybugRed;
+		private Color caterpillarGreen;
 	
 	public Scenery(String timeOfDay, String season) {
         setFocusable(true); // make sure focus is in this JPanel. This will become more important when we start using buttons.
@@ -24,51 +46,58 @@ public class Scenery extends JPanel {
 		this.timeOfDay = timeOfDay;
 		this.season = season;
 
-		skyBlue = new Color(79, 163, 238);
-		grassGreen = new Color(93, 178, 77);
-		grassFall = new Color(125, 105, 57);
-		skyDarkBlue = new Color(0, 0, 139);
-
-
-		greyWhite = new Color(211, 211, 211);
-
-		darkWood = new Color(133, 94, 66);
+		initializeColors();
+		configureSeasonColors();
 		
-		pink = new Color(255, 105, 180);
-		flowerGreen = new Color(16, 127, 52);
-
-		ladybugRed = new Color(231, 24, 9);
 		
-		caterpillarGreen = new Color(20, 107, 71);
+	}
 
-		darkGreyBrown = new Color(80, 70, 65);
-		deepGoldenBrown = new Color(95, 60, 35);
-		freshWarmBrown = new Color(115, 78, 48);
-		treeLeafOrange = new Color(230, 132, 14);
+	// setting c
+	private void initializeColors() {
+		// sky & ground
+        skyBlue = new Color(79, 163, 238);
+        skyDarkBlue = new Color(0, 0, 139);
+        grassGreen = new Color(93, 178, 77);
+        grassFall = new Color(125, 105, 57);
+        snowWhite = new Color(211, 211, 211);
 
+        // trees & wood
+        winterTrunkBrown = new Color(80, 70, 65);
+        fallTrunkBrown = new Color(95, 60, 35);
+        springTrunkBrown = new Color(115, 78, 48);
+        houseWood = new Color(133, 94, 66);
+        leafOrange = new Color(230, 132, 14);
+
+        // plants & animal colors
+        foliageGreen = new Color(16, 127, 52);
+        flowerPink = new Color(255, 105, 180);
+        ladybugRed = new Color(231, 24, 9);
+        caterpillarGreen = new Color(20, 107, 71);
+	}
+
+	// configuring season colors
+	private void configureSeasonColors() {
 		if (season.equalsIgnoreCase("winter")) {
 
-			tree = darkGreyBrown;
-			grass = greyWhite;
+            treeTrunkColor = winterTrunkBrown;
+            grassColor = snowWhite;
+        } else if (season.equalsIgnoreCase("fall")) {
 
-		} else if (season.equalsIgnoreCase("fall")) {
+            treeTrunkColor = fallTrunkBrown;
+            grassColor = grassFall;
+        } else { // code for spring
 
-			tree = deepGoldenBrown;
-			grass = grassFall;
-		} else { // code for spring
+            treeTrunkColor = springTrunkBrown;
+            grassColor = grassGreen;
+        }
 
-			tree = freshWarmBrown;
-			grass = grassGreen;
-		}
-
-		
 	}
 
 
 	@Override
 	public Dimension getPreferredSize() {
 		//Sets the size of the panel
-		return new Dimension(800,600);  // max size 1920 (width) by 1080 (height)
+		return new Dimension(PANELW, PANELH);  // max size 1920 (width) by 1080 (height)
 	}
 
 
@@ -91,17 +120,30 @@ public class Scenery extends JPanel {
     // Make methods that are just called from within this class private
 	// CHECKING ERRONEOUS INPUT IN RUNNER.JAVA
 	private void drawBackground(Graphics g) { 
-		// Draw a background for either a day or night scene
-		
+
+		drawSky(g);
+		drawGround(g);
+		drawTrees(g);
+		drawHouse(g);
+
+		//Foreground
+		drawFlowers(g, 100, 500);
+		drawFlowers(g, 300, 500);
+		drawLadybug(g, 450, 410);
+		drawCaterpillar(g, 530, 405);
+
+	}
+
+	private void drawSky(Graphics g) {
 		// changing scene based on day/night
 		if (timeOfDay.equalsIgnoreCase("day")) {
 			g.setColor(skyBlue);
-			g.fillRect(0, 0, 800, 350);
+			g.fillRect(0, 0, PANELW, HORIZONY);
 			g.setColor(Color.YELLOW);
 			g.fillOval(30, 20, 75, 75);
 		} else {
 			g.setColor(skyDarkBlue);
-        	g.fillRect(0, 0, 800, 350);
+        	g.fillRect(0, 0, PANELW, HORIZONY);
 
 			g.setColor(Color.WHITE);
 			g.fillArc(30, 20, 85, 85, 115, 200);
@@ -111,34 +153,30 @@ public class Scenery extends JPanel {
 			int starH = 6;
 			int numberOfStars = 15;
 			for (int i = 0; i < numberOfStars; i++) {
-				int starX = (int) (Math.random() * (800 + 1));
-				int starY = (int) (Math.random() * (350 + 1));
+				int starX = (int) (Math.random() * (PANELW + 1));
+				int starY = (int) (Math.random() * (HORIZONY + 1));
 				g.fillOval(starX, starY, starW, starH);
 			}
 		}
+	}
 
+	private void drawGround(Graphics g) {
+		g.setColor(grassColor);
+		g.fillRect(0, HORIZONY, PANELW, PANELH - HORIZONY);
+	}
 
-		// grass logic
-
-		g.setColor(grass);
-		g.fillRect(0, 350, 800, 250);
-
-
-		// tree logic
-
+	private void drawRowsOfTrees(Graphics g) {
 		int numberOfTrees = 10;   
 		int startX = 400;   
 		int spacingX = 125;   
 		int spacingY = 150;
 
 		int currentTreeX = startX;
-		int currentTreeY = 350;    
+		int currentTreeY = HORIZONY;    
 
 		for (int i = 0; i < numberOfTrees; i++) {
 
-			drawTree(g, currentTreeX, currentTreeY, currentTreeX - 10, currentTreeY - 30);
-			
-
+			drawTree(g, currentTreeX, currentTreeY);
 			currentTreeX += spacingX;
 			
 			// After drawing the 5th tree, move to the second row
@@ -147,48 +185,36 @@ public class Scenery extends JPanel {
 				currentTreeY += spacingY;
 			}
 		}
-
-		// house logic
-
-		drawHouse(g);
-
-		drawFlowers(g, 100, 500);
-
-		drawFlowers(g, 300, 500);
-
-		drawLadybug(g, 450, 410);
-
-		drawCaterpillar(g);
-
 	}
 
-	private void drawTree(Graphics g, int trunkX, int trunkY, int branchX2, int branchY2) {
+	private void drawTree(Graphics g, int x, y) {
 
 		
 		
 		int trunkW = 20;
 		int trunkH = 50;
+		int treeCrownSize = 50;
 		// tree trunk
-		g.setColor(tree);
-		g.fillRect(trunkX, trunkY, trunkW, trunkH);
+		g.setColor(treeTrunkColor);
+		g.fillRect(x, y, trunkW, trunkH);
 
 		if (season.equalsIgnoreCase("winter")) {
 			// left main branch
-			g.drawLine(trunkX, trunkY + 10, branchX2, branchY2);
+			g.drawLine(x, y + 10, x - 10, y - 30);
 
 			// right main branch
-			g.drawLine(trunkX + trunkW, trunkY + 10, branchX2 + 45, branchY2 + 5);
+			g.drawLine(x + trunkW, y + 10, x + 35, y - 25);
 
 			// secondary branches
-			g.drawLine(trunkX + 10, trunkY, branchX2 + 20, branchY2 - 15);
-			g.drawLine(trunkX + 3, trunkY + 25, branchX2 - 10, branchY2 + 20);
-			g.drawLine(trunkX + 17, trunkY + 25, branchX2 + 55, branchY2 + 25);
+			g.drawLine(x + 10, y, x + 10, y - 45);
+			g.drawLine(x + 3, y + 25, x - 20, y - 10);
+			g.drawLine(x + 17, y + 25, x + 45, y - 5);
 		} else if (season.equalsIgnoreCase("fall")) {
-			g.setColor(treeLeafOrange);
-			g.fillOval(trunkX - 15, trunkY - 45, 50, 50);
+			g.setColor(leafOrange);
+			g.fillOval(x - 15, y - 45, treeCrownSize, treeCrownSize);
 		} else { //code for spring
-			g.setColor(flowerGreen);
-			g.fillOval(trunkX - 15, trunkY - 45, 50, 50);
+			g.setColor(foliageGreen);
+			g.fillOval(x - 15, y - 45, treeCrownSize, treeCrownSize);
 		}
 
 	}
@@ -198,8 +224,8 @@ public class Scenery extends JPanel {
 
 
 		// main walls
-		g.setColor(darkWood);
-		g.fillRect(100, 400, 200, 150); // Width 200, Height 150
+		g.setColor(houseWood);
+		g.fillRect(100, 400, 200, 150);
 		
 		// house outline
 		g.setColor(Color.BLACK);
@@ -213,23 +239,21 @@ public class Scenery extends JPanel {
 		g.setColor(Color.BLACK);
 		g.drawRect(80, 380, 240, 20);
 
-		// front door
-		g.setColor(freshWarmBrown);
+		// door
+		g.setColor(springTrunkBrown);
 		g.fillRect(180, 470, 40, 80);
-		
-		// door outline
+			// door outline
 		g.setColor(Color.BLACK);
 		g.drawRect(180, 470, 40, 80);
-		
-		// Color.YELLOW doorknob
+			// doorknob
 		g.setColor(Color.YELLOW);
 		g.fillOval(212, 510, 6, 6);
 
 
 		// window
-		g.setColor(greyWhite);
+		g.setColor(snowWhite);
 		g.fillRect(180, 415, 40, 40);
-		// window lines
+			// window lines
 		g.setColor(Color.BLACK);
 		g.drawLine(200, 415, 200, 455);
 		g.drawLine(180, 435, 220, 435);
@@ -239,7 +263,7 @@ public class Scenery extends JPanel {
 	private void drawFlowers(Graphics g, int x, int y) {
 		
 		// stem
-		g.setColor(flowerGreen);
+		g.setColor(foliageGreen);
     	g.fillRect(x - 3, y, 6, 60);
     
 		// leaves
@@ -247,17 +271,16 @@ public class Scenery extends JPanel {
 		g.fillOval(x + 3, y + 30, 15, 10);  // Right leaf
 
 		// petals
-		int petalW = 20;
-		int petalH = 20;
+		int petalSize = 20;
 		g.setColor(Color.YELLOW);
-		g.fillOval(x - 15, y - 25, petalW, petalH); // Top-left petal
-		g.fillOval(x - 5,  y - 25, petalW, petalH); // Top-right petal
-		g.fillOval(x - 20, y - 15, petalW, petalH); // Left petal
-		g.fillOval(x + 0,  y - 15, petalW, petalH); // Right petal
-		g.fillOval(x - 10, y - 5, petalW, petalH);  // Bottom petal
+		g.fillOval(x - 15, y - 25, petalSize, petalSize); // Top-left petal
+		g.fillOval(x - 5,  y - 25, petalSize, petalSize); // Top-right petal
+		g.fillOval(x - 20, y - 15, petalSize, petalSize); // Left petal
+		g.fillOval(x + 0,  y - 15, petalSize, petalSize); // Right petal
+		g.fillOval(x - 10, y - 5, petalSize, petalSize);  // Bottom petal
 
 		// central circle
-		g.setColor(pink);
+		g.setColor(flowerPink);
 		g.fillOval(x - 7, y - 17, 14, 14);
 	}
 
@@ -274,11 +297,11 @@ public class Scenery extends JPanel {
 		g.drawLine(x + 25, y, x + 25, y + 60);
 
 		// spots on body
-		int radius = 6;
-		g.fillOval(x + 8, y + 15, radius, radius);
-		g.fillOval(x + 15, y + 35, radius, radius);
-		g.fillOval(x + 36, y + 15, radius, radius);
-		g.fillOval(x + 29, y + 35, radius, radius);
+		int spotRadius = 6;
+		g.fillOval(x + 8, y + 15, spotRadius, spotRadius);
+		g.fillOval(x + 15, y + 35, spotRadius, spotRadius);
+		g.fillOval(x + 36, y + 15, spotRadius, spotRadius);
+		g.fillOval(x + 29, y + 35, spotRadius, spotRadius);
 
 		// legs
 			// left
@@ -297,11 +320,11 @@ public class Scenery extends JPanel {
 	}
 
 	private void drawCaterpillar(Graphics g) {
-
-		// body segments
 		int segmentCount = 6;
 		int spacing = 35;
 		int size = 45;
+
+		// body segments
 		for(int i = 0; i < segmentCount; i++) {
 			int x = 530 + (i * spacing);
 
@@ -321,7 +344,7 @@ public class Scenery extends JPanel {
 		int headY = 400;
 		int headSize = 50;
 
-		// head + outline
+		// head & outline
 		g.setColor(caterpillarGreen);
 		g.fillOval(headX, headY, headSize, headSize);
 		g.setColor(Color.BLACK);
@@ -330,6 +353,7 @@ public class Scenery extends JPanel {
 		// eyes
 		int eyeSize = 10;
 		int pupilSize = 4;
+
 		g.setColor(Color.WHITE);
 			// left
 		g.fillOval(headX + 15, headY + 15, eyeSize, eyeSize);
@@ -346,19 +370,13 @@ public class Scenery extends JPanel {
 		g.drawArc(headX + 17, headY + 25, 20, 15, 180, 180);
 
 		// Antennae
-		int ovalRadius = 6;
+		int antennaTipRadius = 6;
 			// left
 		g.drawLine(headX + 20, headY, headX + 10, headY - 15);
-		g.fillOval(headX + 7, headY - 20, ovalRadius, ovalRadius);
+		g.fillOval(headX + 7, headY - 20, antennaTipRadius, antennaTipRadius);
 			// right
 		g.drawLine(headX + 35, headY, headX + 45, headY - 15);
-		g.fillOval(headX + 42, headY - 20, ovalRadius, ovalRadius);
-
-
-
-		// draw overlapping ovals using for loops
-		// draw head
-		// draw eyes
+		g.fillOval(headX + 42, headY - 20, antennaTipRadius, antennaTipRadius);
 	}
 
 
