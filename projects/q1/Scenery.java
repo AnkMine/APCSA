@@ -8,9 +8,14 @@ import java.awt.Dimension;
 public class Scenery extends JPanel {
 	
 		// Panel Dimensions
-		private static final int PANEL = 800;
+		private static final int PANELW = 800;
 		private static final int PANELH = 600;
 		private static final int HORIZONY = 350;
+
+		// star configurations
+		private int[] starXPositions;
+		private int[] starYPositions;
+		private static final int numStars = 15;
 		
 		// Scene Configurations
 		private String timeOfDay;
@@ -48,6 +53,14 @@ public class Scenery extends JPanel {
 
 		initializeColors();
 		configureSeasonColors();
+
+		// set starX/Y posistions to new array with 15 slots, and fill up array with for loop
+		starXPositions = new int[numStars];
+		starYPositions = new int[numStars];
+		for (int i + 0; i < numStars; i++) {
+			starXPositions[i] = (int) (Math.random() * (PANELW + 1));
+			starYPositions[i] = (int) (Math.random() * (HORIZONY + 1));
+		}
 		
 		
 	}
@@ -111,51 +124,48 @@ public class Scenery extends JPanel {
 
 
 		// Create a method for each item that you draw
-		drawBackground(g);
 
-
-	}
-
-
-    // Make methods that are just called from within this class private
-	// CHECKING ERRONEOUS INPUT IN RUNNER.JAVA
-	private void drawBackground(Graphics g) { 
-
+		// background
 		drawSky(g);
 		drawGround(g);
-		drawTrees(g);
+
+		// midground
+		drawRowsOfTrees(g);
 		drawHouse(g);
 
 		//Foreground
 		drawFlowers(g, 100, 500);
 		drawFlowers(g, 300, 500);
 		drawLadybug(g, 450, 410);
-		drawCaterpillar(g, 530, 405);
+		drawCaterpillar(g);
+
+
 
 	}
+
 
 	private void drawSky(Graphics g) {
 		// changing scene based on day/night
 		if (timeOfDay.equalsIgnoreCase("day")) {
+				// light sky
 			g.setColor(skyBlue);
 			g.fillRect(0, 0, PANELW, HORIZONY);
+				// sun
 			g.setColor(Color.YELLOW);
 			g.fillOval(30, 20, 75, 75);
 		} else {
+				// dark sky
 			g.setColor(skyDarkBlue);
         	g.fillRect(0, 0, PANELW, HORIZONY);
-
+				// moon
 			g.setColor(Color.WHITE);
 			g.fillArc(30, 20, 85, 85, 115, 200);
-
+				// stars
 			g.setColor(Color.YELLOW);
 			int starW = 6;
 			int starH = 6;
-			int numberOfStars = 15;
-			for (int i = 0; i < numberOfStars; i++) {
-				int starX = (int) (Math.random() * (PANELW + 1));
-				int starY = (int) (Math.random() * (HORIZONY + 1));
-				g.fillOval(starX, starY, starW, starH);
+			for (int i = 0; i < numStars; i++) {
+				g.fillOval(starXPositions[i], starYPositions[i], starW, starH);
 			}
 		}
 	}
@@ -166,7 +176,9 @@ public class Scenery extends JPanel {
 	}
 
 	private void drawRowsOfTrees(Graphics g) {
-		int numberOfTrees = 10;   
+		
+		// tree placement vars
+		int numberOfTrees = 8;
 		int startX = 400;   
 		int spacingX = 125;   
 		int spacingY = 150;
@@ -180,17 +192,17 @@ public class Scenery extends JPanel {
 			currentTreeX += spacingX;
 			
 			// After drawing the 5th tree, move to the second row
-			if (i == 4) {     
+			if (i == 3) {     
 				currentTreeX = startX;
 				currentTreeY += spacingY;
 			}
 		}
 	}
 
-	private void drawTree(Graphics g, int x, y) {
+	private void drawTree(Graphics g, int x, int y) {
 
 		
-		
+		// tree size vars
 		int trunkW = 20;
 		int trunkH = 50;
 		int treeCrownSize = 50;
@@ -379,7 +391,4 @@ public class Scenery extends JPanel {
 		g.fillOval(headX + 42, headY - 20, antennaTipRadius, antennaTipRadius);
 	}
 
-
-
-    
 }
