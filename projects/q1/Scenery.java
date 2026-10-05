@@ -57,7 +57,7 @@ public class Scenery extends JPanel {
 		// set starX/Y posistions to new array with 15 slots, and fill up array with for loop
 		starXPositions = new int[numStars];
 		starYPositions = new int[numStars];
-		for (int i + 0; i < numStars; i++) {
+		for (int i = 0; i < numStars; i++) {
 			starXPositions[i] = (int) (Math.random() * (PANELW + 1));
 			starYPositions[i] = (int) (Math.random() * (HORIZONY + 1));
 		}
