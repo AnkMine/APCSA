@@ -34,7 +34,7 @@ public class Runner {
         // create new instance of scanner class
         Scanner sc = new Scanner(System.in);
 
-        // get and ensure userInt is an integer > 20
+        // get and ensure userInt is an integer
         String promptMessage1 = "Enter an integer greater than 20: ";
         System.out.print(promptMessage1);
         while (!sc.hasNextInt()) {
