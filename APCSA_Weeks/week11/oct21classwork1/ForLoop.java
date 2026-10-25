@@ -56,6 +56,7 @@ public class ForLoop{
 	System.out.println();
 	}
 	
-	// We use a for-loop when we want to print stuff multiple times with less lines of code. Let's say we want to draw a row of grass, instead of having lots of drawLine(); with confusing numbers, we could have a for loop which is simpler to read, and position the object around faster
+	// We use a for-loop when we want to print stuff multiple times with less lines of code. Let's say we want to draw a row of grass, 
+	// instead of having lots of drawLine(); with confusing numbers, we could have a for loop which is simpler to read, and position the object around faster
 
 }
