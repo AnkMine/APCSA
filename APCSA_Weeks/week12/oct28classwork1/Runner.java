@@ -14,5 +14,5 @@ public class Runner {
 
     }
 
-    // it runs 'r' 2 times and 'c' 1 time, adding '2' to total each time (2times of adding 2 is 4)
+    // it runs (outer loop) 'r' 2 times and (inner loop) 'c' 1 time, adding '2' to total each time (2times of adding 2 is 4)
 }
