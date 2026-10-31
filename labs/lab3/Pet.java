@@ -17,7 +17,7 @@ public class Pet {
     }
 
     // keeps hunger and happiness within 0-100
-    public void clampStats() {
+    private void clampStats() {
         // checks if hunger is below or above the allowed range
         if (hunger < 0) {
             hunger = 0;
