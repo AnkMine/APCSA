@@ -18,6 +18,7 @@ public class Runner {
         frame.pack();
         frame.setVisible(true);
         // Add a call to your animate method
+        obj.animate();
 
 
        
