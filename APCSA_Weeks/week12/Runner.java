@@ -30,6 +30,6 @@ class ForTest {
     }
 }
 
-// A for loop is the best choice for 
-// implementing a factorial because the exact number of iterations needed is already known beforehand
-// allowing the initialization, condition, and increment in a single line of code
+// A for loop is ideal for implementing factorials 
+// because the exact number of iterations is known beforehand. 
+// This keeps the loop's initialization, condition, and increment organized on a single line.
