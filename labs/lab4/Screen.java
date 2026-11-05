@@ -52,23 +52,52 @@ public class Screen extends JPanel implements KeyListener {
 	}
 
     public void drawBackground(Graphics g) {
-        g.setColor(Color.GREEN);
+        g.setColor(new Color(40, 40, 40));
         g.fillRect(0, 0, 800, 600);
     }
 
+    // Required KeyListener interface methods
 
     @Override
     public void keyPressed(KeyEvent e) {
         // Triggers spin when spacebar is pressed
-        if (e.getKeyCode() == 32) {   // or whatever key you want to use for your spin key
-            
+        if (e.getKeyCode() == 32) {
+            if (machine.keepPlaying() && machine.bet <= machine.balance && machine.bet > 0) {
+                machine.play();
             }
+        
+        // if '+' pressed, increase bet by 1
+        } else if (e.getKeyChar() == '+') {
+            machine.increaseBet(1);
+
+        // if "-" pressed, decrease bet by 1
+        } else if (e.getKeyChar() == '-') {
+            machine.decreaseBet(1);
+
+        // if "" pressed, increase bet by 5
+        } else if (e.getKeyCode() == 53) {
+            machine.increaseBet(5);
+        
+        // if "" pressed, decrease bet by 5
+        } else if (e.getKeyCode() == 52) {
+            machine.decreaseBet(5);
+
+        // if "M" is pressed, set bet to max
         }
+        else if (e.getKeyCode() == 77) {
+            machine.setMaxBet();
     
+        // if "N" is pressed, set bet back to 1
+        } else if (e.getKeyCode() == 78) {
+            machine.setMinBet();
+        }
 
+        repaint();
+    }
 
-    // Required KeyListener interface methods
+    
     @Override public void keyTyped(KeyEvent e) {}
+
+
     @Override public void keyReleased(KeyEvent e) {}
-	
 }
