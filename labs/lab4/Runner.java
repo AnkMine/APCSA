@@ -4,9 +4,11 @@ import javax.swing.JFrame;
 public class Runner { 
 
 
+	// main method
 	public static void main(String args[]){
 
 
+		// creates the frame, adds the drawing panel, and shows the window
 		JFrame frame = new JFrame("Slot Machine");
 		 
 		Screen sc = new Screen();

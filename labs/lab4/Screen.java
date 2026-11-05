@@ -90,6 +90,12 @@ public class Screen extends JPanel implements KeyListener {
         // if "N" is pressed, set bet back to 1
         } else if (e.getKeyCode() == 78) {
             machine.setMinBet();
+        
+        // if balance is 0, press 'Q' to quit game
+        } else if (e.getKeyCode() == 81) {
+            if (!machine.keepPlaying()) {
+                System.exit(0);
+            }
         }
 
         repaint();

@@ -91,7 +91,7 @@ public class SlotMachine {
 
        // instruction box
        g.setColor(lightGray);
-       g.fillRect(x, 355, totalWidth, 110);
+       g.fillRect(x, 355, totalWidth, 160);
        g.setColor(Color.DARK_GRAY);
        g.setFont(fontPromptLarge);
        g.drawString("Press the SPACEBAR to spin!", x + 120, 380);
@@ -99,24 +99,28 @@ public class SlotMachine {
        g.drawString("Use the '+' key to increase bet by 1 | Use the '-' key to decrease bet by 1", x + 30, 402);
        g.drawString("Use the '5' key to increase bet by 5 | Use the '4' key to decrease bet by 5", x + 30, 425);
        g.drawString("Use the 'M' key to set bet to max bet | Use the 'N' key to set bet to min bet", x + 30, 450);
+       g.drawString("Press 'Q' to quit the game. ", x + 50, 485);
 
        // stats and warnings
        g.setFont(fontText);
        g.setColor(white);
-       g.drawString("Current Bet: " + bet, x, 500);
-       g.drawString("Last Winnings: " + winnings, x + 250, 500);
+       g.drawString("Current Bet: " + bet, x, 525);
+       g.drawString("Last Winnings: " + winnings, x + 250, 525);
        
        
        // display game over or warning text
        // display bet/balance status/warnings as needed
-       if (balance <= 0) { 
+       if (!keepPlaying()) { 
             g.setColor(Color.RED);
-            g.drawString("Game Over! You are out of points. ", 140, 490);
+            g.drawString("Game Over! You are out of points. ", 140, 550);
+            
        }
         
     }
 
+    // method that increases the bet by the amount given
     public void increaseBet(int amount) {
+        // caps bet at balance so user cant bet more than they have
         if (bet + amount <= balance) {
             bet += amount;
         } else {
@@ -124,7 +128,9 @@ public class SlotMachine {
         }
     }
 
+    // method that decreases the bet by the amount given
     public void decreaseBet(int amount) {
+        // floors bet at 1 so user cant bet 0 or less
         if (bet - amount >= 1) {
             bet -= amount;
         } else {
@@ -132,10 +138,12 @@ public class SlotMachine {
         }
     }
 
+    // sets bet to the max which is the whole balance
     public void setMaxBet() {
         bet = balance;
     }
 
+    // sets bet to the min which is 1
     public void setMinBet() {
         bet = 1;
     }
