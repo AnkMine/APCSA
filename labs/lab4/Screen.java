@@ -62,10 +62,14 @@ public class Screen extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         // Triggers spin when spacebar is pressed
         if (e.getKeyCode() == 32) {
-            if (machine.keepPlaying() && machine.bet <= machine.balance && machine.bet > 0) {
+            if (!machine.keepPlaying()) {
+                // game over, do nothing SlotMachine handles
+            } else if (machine.bet > machine.balance) {
+                machine.warningMessage = "Bet exceeds balance! Lower your bet.";
+            } else {
                 machine.play();
             }
-        
+
         // if '+' pressed, increase bet by 1
         } else if (e.getKeyChar() == '+') {
             machine.increaseBet(1);
@@ -91,11 +95,9 @@ public class Screen extends JPanel implements KeyListener {
         } else if (e.getKeyCode() == 78) {
             machine.setMinBet();
         
-        // if balance is 0, press 'Q' to quit game
+        // Press 'Q' to quit game
         } else if (e.getKeyCode() == 81) {
-            if (!machine.keepPlaying()) {
-                System.exit(0);
-            }
+            System.exit(0);
         }
 
         repaint();

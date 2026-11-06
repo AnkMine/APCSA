@@ -12,11 +12,10 @@ public class SlotMachine {
     private Color blue, yellow, white, lightGray;
     private int num1, num2, num3;
     private int winnings;
-    private String warningMessage;
-
-
+    
     public int balance;
     public int bet;
+    public String warningMessage;
 
 
     // Constructor
@@ -46,13 +45,12 @@ public class SlotMachine {
     // Example: Draw a payout table. 
     private void drawPayout(Graphics g){
         g.setColor(yellow);
-        g.fillRect(30, 18, 335, 100);
+        g.fillRect(30, 18, 275, 83);
         g.setFont(fontPayout);
         g.setColor(blue);
         g.drawString("7 7 7 = 100 points", 40, 40); 
         g.drawString("3 of a kind = 5 points", 40, 60); 
         g.drawString("2 of a kind = 2 points", 40, 80); 
-
 
     } 
 
@@ -64,7 +62,7 @@ public class SlotMachine {
        // draw the payout table
        drawPayout(g);
        g.setColor(Color.WHITE);
-       int x = 140;    
+       int x = 150;    
        int s = 100;
        int totalWidth = 500;
 
@@ -99,21 +97,24 @@ public class SlotMachine {
        g.drawString("Use the '+' key to increase bet by 1 | Use the '-' key to decrease bet by 1", x + 30, 402);
        g.drawString("Use the '5' key to increase bet by 5 | Use the '4' key to decrease bet by 5", x + 30, 425);
        g.drawString("Use the 'M' key to set bet to max bet | Use the 'N' key to set bet to min bet", x + 30, 450);
-       g.drawString("Press 'Q' to quit the game. ", x + 50, 485);
+       g.drawString("Press 'Q' to quit the game. ", x + 167, 475);
 
        // stats and warnings
        g.setFont(fontText);
        g.setColor(white);
-       g.drawString("Current Bet: " + bet, x, 525);
-       g.drawString("Last Winnings: " + winnings, x + 250, 525);
+       g.drawString("Current Bet: " + bet, x, 535);
+       g.drawString("Last Winnings: " + winnings, x + 250, 535);
        
        
        // display game over or warning text
        // display bet/balance status/warnings as needed
        if (!keepPlaying()) { 
             g.setColor(Color.RED);
-            g.drawString("Game Over! You are out of points. ", 140, 550);
-            
+            g.drawString("Game Over! You are out of points. ", x, 575);
+        
+       } else if (warningMessage != null && !warningMessage.isEmpty()) {
+            g.setColor(Color.YELLOW);
+            g.drawString(warningMessage, x, 575);
        }
         
     }
@@ -123,8 +124,11 @@ public class SlotMachine {
         // caps bet at balance so user cant bet more than they have
         if (bet + amount <= balance) {
             bet += amount;
+            warningMessage = "";
         } else {
             bet = balance;
+            warningMessage = "Bet capped at max balance (" + balance + ").";
+            
         }
     }
 
@@ -133,19 +137,23 @@ public class SlotMachine {
         // floors bet at 1 so user cant bet 0 or less
         if (bet - amount >= 1) {
             bet -= amount;
+            warningMessage = "";
         } else {
             bet = 1;
+            warningMessage = "Bet at minimum (1)";
         }
     }
 
     // sets bet to the max which is the whole balance
     public void setMaxBet() {
         bet = balance;
+        warningMessage = "Max bet set to " + bet;
     }
 
     // sets bet to the min which is 1
     public void setMinBet() {
         bet = 1;
+        warningMessage = "Min bet set to 1";
     }
 
    
@@ -178,6 +186,7 @@ public class SlotMachine {
         }
 
         balance += winnings;
+        System.out.println(winnings);
     }  
 
     // Return true if balance > 0. Return false otherwise.
