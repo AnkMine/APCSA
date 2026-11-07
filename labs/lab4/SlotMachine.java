@@ -45,7 +45,7 @@ public class SlotMachine {
     // Example: Draw a payout table. 
     private void drawPayout(Graphics g){
         g.setColor(yellow);
-        g.fillRect(30, 18, 275, 83);
+        g.fillRect(30, 18, 250, 80);
         g.setFont(fontPayout);
         g.setColor(blue);
         g.drawString("7 7 7 = 100 points", 40, 40); 
@@ -68,13 +68,13 @@ public class SlotMachine {
 
        // balance box
        g.setColor(white);
-       g.fillRect(x, 180, totalWidth, 45);
+       g.fillRect(x, 155, totalWidth, 45);
        g.setColor(Color.BLACK);
        g.setFont(fontBalance);
-       g.drawString("Balance: " + balance, x + 175, 212);
+       g.drawString("Balance: " + balance, x + 175, 187);
 
        // slot number boxes
-       int y = 240;
+       int y = 215;
        g.setColor(white);
        g.fillRect(x, y, s, s);
        g.fillRect(x+200, y, s, s);
@@ -89,32 +89,32 @@ public class SlotMachine {
 
        // instruction box
        g.setColor(lightGray);
-       g.fillRect(x, 355, totalWidth, 160);
+       g.fillRect(x, 330, totalWidth, y - 75);
        g.setColor(Color.DARK_GRAY);
        g.setFont(fontPromptLarge);
-       g.drawString("Press the SPACEBAR to spin!", x + 120, 380);
+       g.drawString("Press the SPACEBAR to spin!", x + 120, y + 140);
        g.setFont(fontPromptSmall);
-       g.drawString("Use the '+' key to increase bet by 1 | Use the '-' key to decrease bet by 1", x + 30, 402);
-       g.drawString("Use the '5' key to increase bet by 5 | Use the '4' key to decrease bet by 5", x + 30, 425);
-       g.drawString("Use the 'M' key to set bet to max bet | Use the 'N' key to set bet to min bet", x + 30, 450);
-       g.drawString("Press 'Q' to quit the game. ", x + 167, 475);
+       g.drawString("Use the '+' key to increase bet by 1 | Use the '-' key to decrease bet by 1", x + 30, y + 160);
+       g.drawString("Use the '5' key to increase bet by 5 | Use the '4' key to decrease bet by 5", x + 30, y + 185);
+       g.drawString("Use the 'M' key to set bet to max bet | Use the 'N' key to set bet to min bet", x + 30, y + 210);
+       g.drawString("Press 'Q' to quit the game. ", x + 167, y + 235);
 
        // stats and warnings
        g.setFont(fontText);
        g.setColor(white);
-       g.drawString("Current Bet: " + bet, x, 535);
-       g.drawString("Last Winnings: " + winnings, x + 250, 535);
+       g.drawString("Current Bet: " + bet, x, y + 280);
+       g.drawString("Last Winnings: " + winnings, x + 250, y + 280);
        
        
        // display game over or warning text
        // display bet/balance status/warnings as needed
        if (!keepPlaying()) { 
             g.setColor(Color.RED);
-            g.drawString("Game Over! You are out of points. ", x, 575);
+            g.drawString("Game Over! You are out of points. Press 'Q' to quit the game. ", x, y + 315);
         
        } else if (warningMessage != null && !warningMessage.isEmpty()) {
             g.setColor(Color.YELLOW);
-            g.drawString(warningMessage, x, 575);
+            g.drawString(warningMessage, x, y + 310);
        }
         
     }
@@ -127,7 +127,7 @@ public class SlotMachine {
             warningMessage = "";
         } else {
             bet = balance;
-            warningMessage = "Bet capped at max balance (" + balance + ").";
+            warningMessage = "Bet capped at max balance (" + balance + ")";
             
         }
     }
@@ -187,7 +187,8 @@ public class SlotMachine {
 
         balance += winnings;
         System.out.println(winnings);
-    }  
+        warningMessage = "";
+    }
 
     // Return true if balance > 0. Return false otherwise.
     public boolean keepPlaying() {

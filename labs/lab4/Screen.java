@@ -46,8 +46,6 @@ public class Screen extends JPanel implements KeyListener {
         // Call the draw methods
         drawBackground(g);
         machine.drawMachine(g);
-       
-
 
 	}
 
