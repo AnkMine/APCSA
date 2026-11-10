@@ -25,7 +25,7 @@ public class Runner {
     }
 }
 
-// practice class with for loop methods
+// class with for loop methods
 class ForPractice {
 
     // prints all even numbers up to arg using a for loop
