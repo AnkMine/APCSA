@@ -20,24 +20,29 @@ public class SlotMachine {
 
     // Constructor
     public SlotMachine(int balance) {
-    //Example: Initialize/instantiate instance variables
-    fontPayout = new Font("Arial", Font.BOLD, 20); //14 is font size. 
-    fontSlot = new Font(Font.MONOSPACED, Font.BOLD, 72);
-    fontText = new Font("Arial", Font.BOLD, 18);
+        //Example: Initialize/instantiate instance variables
+        fontPayout = new Font("Arial", Font.BOLD, 20); //14 is font size. 
+        fontSlot = new Font(Font.MONOSPACED, Font.BOLD, 72);
+        fontText = new Font("Arial", Font.BOLD, 18);
 
-    fontBalance = new Font("Arial", Font.BOLD, 26);
-    fontPromptLarge = new Font("Arial", Font.BOLD, 18);
-    fontPromptSmall = new Font("Arial", Font.PLAIN, 13);
+        fontBalance = new Font("Arial", Font.BOLD, 26);
+        fontPromptLarge = new Font("Arial", Font.BOLD, 18);
+        fontPromptSmall = new Font("Arial", Font.PLAIN, 13);
 
-    blue = new Color(0, 0, 255);
-    yellow = new Color(255, 255, 0);
-    white = new Color(255, 255, 255);
-    lightGray = new Color(230, 230, 230);
+        blue = new Color(0, 0, 255);
+        yellow = new Color(255, 255, 0);
+        white = new Color(255, 255, 255);
+        lightGray = new Color(230, 230, 230);
 
-    this.balance = balance;
-    this.bet = 1; // default starting bet
-    this.winnings = 0;
-    this.warningMessage = "";
+        this.balance = balance;
+        this.bet = 1; // default starting bet
+        this.winnings = 0;
+        this.warningMessage = "";
+
+        num1 = (int)(Math.random() * 9) + 1;
+        num2 = (int)(Math.random() * 9) + 1;
+        num3 = (int)(Math.random() * 9) + 1;
+    
 
     }
 
@@ -161,34 +166,34 @@ public class SlotMachine {
 
     /* Generate 3 new random numbers for num1, num2 and num3.  Calculate the winnings.  Updates the balance and 
         winnings. */
-    public void play(){
-
+    public void play() {
+        
         // ensure user has enough balance and a valid bet
         if (balance >= bet && bet > 0) {
             balance -= bet;
 
-            num1 = (int)(Math.random()*9)+1;
-            num2 = (int)(Math.random()*9)+1;
-            num3 = (int)(Math.random()*9)+1;
+            num1 = (int)(Math.random() * 9) + 1;
+            num2 = (int)(Math.random() * 9) + 1;
+            num3 = (int)(Math.random() * 9) + 1;
+        
+            // calculate winnings based on rules
+            if (num1 == 7 && num2 == 7 && num3 == 7) {
+                winnings = 100 * bet;
+            } else if (num1 == num2 && num2 == num3) {
+                winnings = 5 * bet;
+            } else if (num1 == num2 || num2 == num3 || num1 == num3) {
+                winnings = 2 * bet;
+            } else {
+                winnings = 0;
+            }
 
+            balance += winnings;
+            System.out.println(winnings);
         }
         
-
-        // calculate winnings based on rules
-        if (num1 == 7 && num2 == 7 && num3 == 7) {
-            winnings = 100 * bet;
-        } else if (num1 == num2 && num2 == num3) {
-            winnings = 5 * bet;
-        } else if (num1 == num2 || num2 == num3 || num1 == num3) {
-            winnings = 2 * bet;
-        } else {
-            winnings = 0;
-        }
-
-        balance += winnings;
-        System.out.println(winnings);
         warningMessage = "";
     }
+
 
     // Return true if balance > 0. Return false otherwise.
     public boolean keepPlaying() {
