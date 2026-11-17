@@ -100,9 +100,9 @@ public class Runner {
         };
 
         System.out.println("\n\tItem List: \n");
-        // prints menu choices 1-3, skipping index 0 which is the "Print Items" label
-        for(int i = 1; i < choices.length; i++) {
-            System.out.println("\t" + i + ": " + choices[i]);
+        // prints menu choices 1-4
+        for(int i = 1; i < choices.length+1; i++) {
+            System.out.println("\t" + i + ": " + choices[i-1]);
         }
 
         System.out.print("\nType an integer (1-4) based on the menu above: ");

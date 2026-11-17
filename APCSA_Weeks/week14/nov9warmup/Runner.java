@@ -10,6 +10,7 @@ public class Runner {
         // calls printArr(); method using array
         array.printArr();
 
+        // calls getSum() method, stores and then prints the returned value
         int sum = array.getSum();
         System.out.println("The sum is " + sum);
     

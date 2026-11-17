@@ -1,3 +1,4 @@
+// class that creates an item object
 public class Item {
 
     // declare private instance variables
